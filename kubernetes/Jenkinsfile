@@ -13,7 +13,7 @@ podTemplate(label: label, containers: [
         // Slack - 빌드 시작시
         // #1 Github 소스 가져오기
     stage('Get Source') {
-        git credentialsId: 'joomook', url: 'https://github.com/joomook/cicd-front.git', branch: 'master'
+        git credentialsId: 'kimwoomin', url: 'https://github.com/kimwoomin/cicd-front.git', branch: 'master'
     }
     // #2 Properties 파일 읽기
     def props = readProperties file:"./kubernetes/pipeline.properties"
