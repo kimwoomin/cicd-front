@@ -7,7 +7,7 @@ containerTemplate(name: 'npm', image: 'node:lts', command: 'cat', ttyEnabled: tr
   //containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
 containerTemplate(name: 'docker', image: 'docker:dind', command: 'dockerd -host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay', ttyEnabled: true, alwaysPullImage: true, privileged: true), 
 containerTemplate(name: 'kubectl', image: 'roffe/kubectl', command: 'cat', ttyEnabled: true) 
- containerTemplate(name: "scanner", image: "newtmitch/sonar-scanner", ttyEnabled: true, command: 
+containerTemplate(name: "scanner", image: "newtmitch/sonar-scanner", ttyEnabled: true, command: "cat") 
 ]) {
   node(label) {
     // 예외처리 구문
