@@ -4,8 +4,7 @@ podTemplate(label: label, containers: [
 // #0 필요한 Pod생성
 containerTemplate(name: 'npm', image: 'node:lts', command: 'cat', ttyEnabled: true),
   //containerTemplate(name: 'gradle', image: 'gradle:4.5.1-jdk8', command: 'cat', ttyEnabled: true), 
-  //containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 
-//'cat'),
+  //containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
 containerTemplate(name: 'docker', image: 'docker:dind', command: 'dockerd -host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay', ttyEnabled: true, alwaysPullImage: true, privileged: true), 
 containerTemplate(name: 'kubectl', image: 'roffe/kubectl', command: 'cat', ttyEnabled: true) 
  containerTemplate(name: "scanner", image: "newtmitch/sonar-scanner", ttyEnabled: true, command: 
@@ -16,7 +15,7 @@ containerTemplate(name: 'kubectl', image: 'roffe/kubectl', command: 'cat', ttyEn
         // Slack - 빌드 시작시
         // #1 Github 소스 가져오기
 stage('Get Source') { 
-git credentialsId: 'kimwoomin}', url: 'https://github.com/kimwoomin/cicd-front.git', branch: 'master'
+git credentialsId: 'joomook}', url: 'https://github.com/joomook/cicd-front.git', branch: 'master'
 }
         // #2 Properties 파일 읽기
 def props = readProperties file:"./kubernetes/pipeline.properties" 
@@ -61,7 +60,7 @@ stage('Deploy') {
     container('kubectl') { 
         sh "kubectl apply -n ${namespace} -f ${deployment}" 
         sh "kubectl apply -n ${namespace} -f ${service}" 
-        sh "kubectl get svc -n namespace"  
+        sh "kubectl get svc -n devops"  
     } 
 } 
         // Slack - 빌드 성공시
